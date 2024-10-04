@@ -1,7 +1,256 @@
-*,
-::before,
-::after {
+/* Custom Font de rick y morty */
+@font-face {
+  font-family: "Rick&Morty";
+  src: url("../public/font/WubbaLubbaDubDub.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  --yellow: #cbdb78;
+  --green: #b0c936c9;
+  --blue: #00aec7;
+  --dark-blue: #073b4c;
+  --white: #f5f5f5;
+  --black: #0f0f0f;
+}
+/* Estilos generales */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  gap: 2rem;
+}
+
+h1 {
+  font-size: 8rem;
+  color: var(--blue);
+  line-height: 1.4;
+  text-shadow: 
+    1px 1px 1px var(--black), 
+    5px 0px 8px var(--yellow),
+    -5px 0px 8px var(--yellow),
+    0px 8px 8px var(--yellow),
+    0px -8px 8px var(--yellow);
+}
+
+img {
+  width: 150px;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--green);
+  border-radius: 2rem;
+  padding: 0.8rem;
+  width: 100%;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  color: var(--white);
+}
+
+.search-bar input::placeholder {
+  color: var(--white);
+}
+
+.search-bar i {
+ color: var(--white);
+ margin-right: 0.8rem;
+ cursor: pointer;
+}
+
+/* Lista de personajes */
+.character-list {
+  margin: 0 auto;
+}
+.character-list h2 {
+  text-shadow: 1px 1px 1px var(--yellow);
+  font-size: 2.5rem;
+  margin-bottom: 3.5rem;
+  border-bottom: 2px solid var(--yellow);
+  display: inline-block;
+}
+
+.characters {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-content: center;
+}
+
+.character-card {
+  cursor:  pointer;
+  display: flex;
+  max-width: 250px;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background-color: var(--dark-blue);
+  border-radius: 0.8rem;
+  text-align: center;
+  padding: 1.2rem;
+  height: 300px;
+  border: 2px solid var(--yellow); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.character-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px var(--yellow);
+}
+
+.character-card img {
+  position: absolute;
+  top: -1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.character-card:hover img {
+  transform: translateX(-50%) rotate(10deg); 
+}
+
+.character-card h3 {
+  font-size: 1.2rem;
+}
+
+.character-card p {
+  font-size: 0.9rem;
+}
+
+/* Boton mobile */
+.mobile-bar {
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  background-color: var(--yellow);
+  width: 100%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-mobile {
+  background: transparent;
+  border: none;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.btn-mobile:hover {
+  color: var(--white);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 5rem;
+  }
+  .search-bar {
+    padding: 0.5rem;
+  }
+  .character-list h2 {
+    font-size: 2rem;
+  }
+  .character-card img {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  .search-bar {
+    display: none;
+  }
+
+  .search-bar.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    animation: none;
+    z-index: 10;
+    background-color: var(--white);
+    opacity: 0.9;
+    border-radius: 0.1rem;
+  }
+
+  .search-bar input {
+    font-size: 0.8rem;
+    color: var(--black);
+  }
+
+  .search-bar i {
+    display: none;
+  }
+
+
+  .characters {
+    display: grid;
+    gap: 3.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-content: center;
+  }
+
+  .character-card {
+    padding: 10px;
+    width: 250px;
+    margin: 0 auto;
+  }
+
+  .character-card h3 {
+    font-size: 1rem;
+  }
+
+  .mobile-bar {
+    display: flex;
+  }
+}
+
+/* Utilities */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.2rem;
+}
+
+.f-rm {
+  font-family: "Rick&Morty", sans-serif;
 }
