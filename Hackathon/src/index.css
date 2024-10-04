@@ -1,7 +1,7 @@
 /* Custom Font de rick y morty */
 @font-face {
   font-family: "Rick&Morty";
-  src: url("../public/font/WubbaLubbaDubDub.ttf") format("truetype");
+  src: url("/font/WubbaLubbaDubDub.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -26,7 +26,12 @@ body {
   color: var(--white);
 }
 
-header {
+img {
+  width: 150px;
+}
+
+/* Header */
+.header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,24 +39,16 @@ header {
   gap: 2rem;
 }
 
-h1 {
+.header__title {
   font-size: 8rem;
   color: var(--blue);
   line-height: 1.4;
-  text-shadow: 
-    1px 1px 1px var(--black), 
-    5px 0px 8px var(--yellow),
-    -5px 0px 8px var(--yellow),
-    0px 8px 8px var(--yellow),
+  text-shadow: 1px 1px 1px var(--black), 5px 0px 8px var(--yellow),
+    -5px 0px 8px var(--yellow), 0px 8px 8px var(--yellow),
     0px -8px 8px var(--yellow);
 }
 
-img {
-  width: 150px;
-}
-
-/* Barra de búsqueda */
-.search-bar {
+.header__search-bar {
   display: flex;
   align-items: center;
   background-color: var(--green);
@@ -68,7 +65,7 @@ img {
   }
 }
 
-.search-bar input {
+.header__search-bar__input {
   flex: 1;
   border: none;
   background: none;
@@ -78,37 +75,45 @@ img {
   color: var(--white);
 }
 
-.search-bar input::placeholder {
+.header__search-bar__input::placeholder {
   color: var(--white);
 }
 
-.search-bar i {
- color: var(--white);
- margin-right: 0.8rem;
- cursor: pointer;
+.header__search-bar i {
+  color: var(--white);
+  margin-right: 0.8rem;
+  cursor: pointer;
 }
 
 /* Lista de personajes */
-.character-list {
-  margin: 0 auto;
-}
-.character-list h2 {
-  text-shadow: 1px 1px 1px var(--yellow);
-  font-size: 2.5rem;
+.character-list__title {
+  display: flex;
+  align-items: center;
   margin-bottom: 3.5rem;
-  border-bottom: 2px solid var(--yellow);
-  display: inline-block;
+  gap: 0.8rem;
 }
 
-.characters {
+.character-list__title__text {
+  text-shadow: 1px 1px 1px var(--yellow);
+  font-size: 2.5rem;
+}
+
+.character-list__title__decoration {
+  height: 2px;
+  background-color: var(--yellow);
+  flex: 1;
+  margin-top: 1rem;
+}
+
+.character-list__grid {
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   justify-content: center;
 }
 
-.character-card {
-  cursor:  pointer;
+.character-list__grid__card {
+  cursor: pointer;
   display: flex;
   max-width: 250px;
   flex-direction: column;
@@ -119,16 +124,16 @@ img {
   text-align: center;
   padding: 1.2rem;
   height: 300px;
-  border: 2px solid var(--yellow); 
+  border: 2px solid var(--yellow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.character-card:hover {
+.character-list__grid__card:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 20px var(--yellow);
 }
 
-.character-card img {
+.character-list__grid__card__img {
   position: absolute;
   top: -1.2rem;
   left: 50%;
@@ -137,15 +142,15 @@ img {
   transition: transform 0.3s ease;
 }
 
-.character-card:hover img {
-  transform: translateX(-50%) rotate(10deg); 
+.character-list__grid__card__img:hover {
+  transform: translateX(-50%) rotate(10deg);
 }
 
-.character-card h3 {
+.character-list__grid__card__title {
   font-size: 1.2rem;
 }
 
-.character-card p {
+.character-list__grid__card__body {
   font-size: 0.9rem;
 }
 
@@ -162,7 +167,7 @@ img {
   align-items: center;
 }
 
-.btn-mobile {
+.mobile-bar__btn {
   background: transparent;
   border: none;
   transform: translateX(-50%);
@@ -170,37 +175,36 @@ img {
   z-index: 10;
 }
 
-.btn-mobile:hover {
+.mobile-bar__btn:hover {
   color: var(--white);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-
-  h1 {
+  .header__title {
     font-size: 5rem;
   }
-  .search-bar {
+  .header__search-bar {
     padding: 0.5rem;
   }
-  .character-list h2 {
+  .character-list__title__text {
     font-size: 2rem;
   }
-  .character-card img {
+  .character-list__grid__card__img {
     width: 100px;
   }
 }
 
 @media (max-width: 480px) {
-  h1 {
+  .header__title {
     font-size: 3rem;
   }
 
-  .search-bar {
+  .header__search-bar {
     display: none;
   }
 
-  .search-bar.active {
+  .header__search-bar.active {
     display: block;
     position: fixed;
     top: 0;
@@ -212,30 +216,36 @@ img {
     border-radius: 0.1rem;
   }
 
-  .search-bar input {
+  .header__search-bar__input {
     font-size: 0.8rem;
     color: var(--black);
   }
 
-  .search-bar i {
+  .header__search-bar i {
     display: none;
   }
 
+  .character-list__title {
+    justify-content: center;
+  }
+  .character-list__title__decoration {
+    display: none;
+  }
 
-  .characters {
+  .character-list__grid {
     display: grid;
     gap: 3.5rem;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     justify-content: center;
   }
 
-  .character-card {
+  .character-list__grid__card {
     padding: 10px;
     width: 250px;
     margin: 0 auto;
   }
 
-  .character-card h3 {
+  .character-list__grid__card__title {
     font-size: 1rem;
   }
 
@@ -251,6 +261,6 @@ img {
   padding: 1.2rem;
 }
 
-.f-rm {
+.font-rick {
   font-family: "Rick&Morty", sans-serif;
 }

@@ -11,8 +11,9 @@ export default function SearchBar({ showbar }: { showbar: boolean }) {
   }, [showbar]);
 
   return (
-    <div className={`search-bar ${showbar && "active"}`} id="searchBar">
+    <div className={`header__search-bar ${showbar && "active"}`}>
       <input
+        className="header__search-bar__input"
         ref={inputRef}
         id="name"
         name="name"

@@ -5,7 +5,7 @@ export default function MobileBar({
 }) {
   return (
     <div className="mobile-bar">
-      <button className="btn-mobile" onClick={handleOnCLick}>
+      <button className="mobile-bar__btn" onClick={handleOnCLick}>
         <i className="fa-solid fa-magnifying-glass fa-xl"></i>
       </button>
     </div>

@@ -10,22 +10,26 @@ function App() {
   };
   return (
     <div className="container">
-      <header>
-        <h1 className="title f-rm">Rick Y Morty</h1>
+      <header className="header">
+        <h1 className="header__title font-rick">Rick Y Morty</h1>
         <SearchBar showbar={showBar} />
       </header>
 
       <section className="character-list">
-        <h2 className="f-rm">Lista de personatges</h2>
-        <div className="characters">
-          <div className="character-card">
+        <div className="character-list__title">
+          <h2 className="character-list__title__text font-rick">Lista de personatges</h2>
+          <div className="character-list__title__decoration" ></div>
+        </div>
+        <div className="character-list__grid">
+          <div className="character-list__grid__card">
             <img
               src="/istockphoto-522001766-2048x2048.jpg"
               alt="Rick Sanchez"
+              className="character-list__grid__card__img"
             />
-            <h3>Rick Sanchez</h3>
-            <p>Human</p>
-            <p>Earth (C-137)</p>
+            <h3 className="character-list__grid__card__title" >Rick Sanchez</h3>
+            <p className="character-list__grid__card__body" >Human</p>
+            <p className="character-list__grid__card__body" >Earth (C-137)</p>
           </div>
         </div>
       </section>
