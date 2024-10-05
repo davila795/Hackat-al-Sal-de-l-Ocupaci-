@@ -1,7 +1,12 @@
-import { useEffect, useRef } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import "./SearchBar.css";
 
-export default function SearchBar({ showbar }: { showbar: boolean }) {
+type SearchBarProps = {
+  showbar: boolean;
+  handleOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export default function SearchBar({ showbar, handleOnChange }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -20,6 +25,7 @@ export default function SearchBar({ showbar }: { showbar: boolean }) {
         name="name"
         type="text"
         placeholder="Troba un personatge"
+        onChange={handleOnChange}
       />
       <label htmlFor="name">
         <i className="fa-solid fa-magnifying-glass fa-xl"></i>
