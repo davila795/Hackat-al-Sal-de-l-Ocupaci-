@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import "./SearchBar.css";
 
 export default function SearchBar({ showbar }: { showbar: boolean }) {
   const inputRef = useRef<HTMLInputElement>(null);

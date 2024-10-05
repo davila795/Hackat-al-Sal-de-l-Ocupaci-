@@ -1,0 +1,76 @@
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  gap: 2rem;
+}
+
+.header__title {
+  font-size: 8rem;
+  color: var(--blue);
+  line-height: 1.4;
+  text-shadow: 1px 1px 1px var(--black), 5px 0px 8px var(--yellow),
+    -5px 0px 8px var(--yellow), 0px 8px 8px var(--yellow),
+    0px -8px 8px var(--yellow);
+}
+
+/* Lista de personajes */
+.character-list__title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3.5rem;
+  gap: 0.8rem;
+}
+
+.character-list__title__text {
+  text-shadow: 1px 1px 1px var(--yellow);
+  font-size: 2.5rem;
+}
+
+.character-list__title__decoration {
+  height: 2px;
+  background-color: var(--yellow);
+  flex: 1;
+  margin-top: 1rem;
+}
+
+.character-list__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-content: center;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .header__title {
+    font-size: 5rem;
+  }
+
+  .character-list__title__text {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header__title {
+    font-size: 3rem;
+  }
+
+  .character-list__title {
+    justify-content: center;
+  }
+
+  .character-list__title__decoration {
+    display: none;
+  }
+
+  .character-list__grid {
+    display: grid;
+    gap: 3.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    justify-content: center;
+  }
+}

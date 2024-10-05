@@ -1,3 +1,5 @@
+import "./MobileBar.css";
+
 export default function MobileBar({
   handleOnCLick,
 }: {

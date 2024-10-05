@@ -1,6 +1,8 @@
 import { useState } from "react";
-import SearchBar from "./components/SearchBar";
-import MobileBar from "./components/MobileBar";
+import SearchBar from "./components/search-bar/SearchBar";
+import MobileBar from "./components/mobile-bar/MobileBar";
+import Card from "./components/card/Card";
+import "./App.css";
 
 function App() {
   const [showBar, setShowBar] = useState(false);
@@ -8,6 +10,7 @@ function App() {
   const handleOnCLick = () => {
     setShowBar((prevShowBar) => !prevShowBar);
   };
+
   return (
     <div className="container">
       <header className="header">
@@ -17,20 +20,13 @@ function App() {
 
       <section className="character-list">
         <div className="character-list__title">
-          <h2 className="character-list__title__text font-rick">Lista de personatges</h2>
-          <div className="character-list__title__decoration" ></div>
+          <h2 className="character-list__title__text font-rick">
+            Lista de personatges
+          </h2>
+          <div className="character-list__title__decoration"></div>
         </div>
         <div className="character-list__grid">
-          <div className="character-list__grid__card">
-            <img
-              src="/istockphoto-522001766-2048x2048.jpg"
-              alt="Rick Sanchez"
-              className="character-list__grid__card__img"
-            />
-            <h3 className="character-list__grid__card__title" >Rick Sanchez</h3>
-            <p className="character-list__grid__card__body" >Human</p>
-            <p className="character-list__grid__card__body" >Earth (C-137)</p>
-          </div>
+          <Card />
         </div>
       </section>
 
