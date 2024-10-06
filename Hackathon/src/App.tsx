@@ -1,39 +1,17 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { API_URL } from "./config/apiConfig";
-import useDebounce from "./hooks/useDebounce";
-import SearchBar from "./components/search-bar/SearchBar";
+import { ChangeEvent, useRef, useState } from "react";
+import Header from "./components/header/Header";
+import CharacterList from "./components/character-list/CharacterList";
 import MobileBar from "./components/mobile-bar/MobileBar";
-import Card from "./components/card/Card";
-
-import { API, Character } from "./types";
-
-import "./App.css";
+import { useCharacters } from "./hooks/useCharacters";
 
 function App() {
-  const [characters, setCharacters] = useState<Character[]>([]);
   const [showBar, setShowBar] = useState(false);
   const [name, setName] = useState("");
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetchCaractersDebounced(API_URL);
-  }, [page]);
+  const { characters, loading, showMoreButton } = useCharacters(name, page);
 
-  const fetchCaracters = async (url: string) => {
-    try {
-      const response = await fetch(url);
-      const data: API = await response.json();
-      setCharacters(data.results);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
-  const fetchCaractersDebounced = useDebounce({
-    func: fetchCaracters,
-    delay: 500,
-  });
+  const topPageRef = useRef<HTMLDivElement>(null);
 
   const handleOnCLick = () => {
     setShowBar((prevShowBar) => !prevShowBar);
@@ -41,37 +19,31 @@ function App() {
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const url = value === "" ? API_URL : `${API_URL}/?name=${value}`;
-    fetchCaractersDebounced(url);
+    setPage(1);
     setName(value);
   };
 
+  const handleShowMore = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const goToTop = () => {
+    topPageRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="container">
-      <header className="header">
-        <h1 className="header__title font-rick">Rick Y Morty</h1>
-        <SearchBar showbar={showBar} handleOnChange={handleOnChange} />
-      </header>
-
-      <section className="character-list">
-        <div className="character-list__title">
-          <h2 className="character-list__title__text font-rick">
-            Lista de personatges
-          </h2>
-          <div className="character-list__title__decoration"></div>
-        </div>
-        <div className="character-list__grid">
-          {characters ? (
-            characters.map((character) => {
-              return <Card key={character.id} character={character} />;
-            })
-          ) : (
-            <p className="font-rick">No se encontraron resultados</p>
-          )}
-        </div>
-        <button>Ver más...</button>
-      </section>
-
+    <div ref={topPageRef} className="container">
+      <Header showBar={showBar} handleOnChange={handleOnChange} />
+      {loading && <p>CARGANDO....</p>}
+      <CharacterList
+        characters={characters}
+        handleShowMore={handleShowMore}
+        isEmpty={characters.length === 0}
+        showMoreButton={showMoreButton}
+      />
+      <button className="btn--go-top" onClick={goToTop}>
+        <i className="fa-solid fa-circle-up"></i>
+      </button>
       <MobileBar handleOnCLick={handleOnCLick} />
     </div>
   );

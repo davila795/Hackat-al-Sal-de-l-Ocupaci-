@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  gap: 2rem;
+}
+
+.header__title {
+  font-size: 8rem;
+  color: var(--blue);
+  line-height: 1.4;
+  text-shadow: 1px 1px 1px var(--black), 5px 0px 8px var(--yellow),
+    -5px 0px 8px var(--yellow), 0px 8px 8px var(--yellow),
+    0px -8px 8px var(--yellow);
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .header__title {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header__title {
+    font-size: 3rem;
+  }
+}

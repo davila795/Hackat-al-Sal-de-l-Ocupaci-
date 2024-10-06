@@ -10,9 +10,8 @@ export default function SearchBar({ showbar, handleOnChange }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const input = inputRef.current;
-    if (showbar && input) {
-      input.focus();
+    if (showbar) {
+      inputRef.current?.focus();
     }
   }, [showbar]);
 
@@ -24,7 +23,7 @@ export default function SearchBar({ showbar, handleOnChange }: SearchBarProps) {
         id="name"
         name="name"
         type="text"
-        placeholder="Troba un personatge"
+        placeholder="Busca un personaje"
         onChange={handleOnChange}
       />
       <label htmlFor="name">

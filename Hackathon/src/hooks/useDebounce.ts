@@ -5,10 +5,8 @@ type useDebouncePropsType = {
   delay: number;
 };
 
-
-
 export default function useDebounce({ func, delay }: useDebouncePropsType) {
-  let intervalRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   return (url: string) => {
     if (intervalRef.current) clearTimeout(intervalRef.current);
