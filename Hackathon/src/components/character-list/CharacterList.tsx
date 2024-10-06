@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Character } from "../../types";
 import Card from "./card/Card";
 import "./Character-list.css";
