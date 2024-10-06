@@ -34,12 +34,13 @@ function App() {
   return (
     <div ref={topPageRef} className="container">
       <Header showBar={showBar} handleOnChange={handleOnChange} />
-      {loading && <p>CARGANDO....</p>}
+      {loading && <div className="spinning-loader"></div>}
       <CharacterList
         characters={characters}
         handleShowMore={handleShowMore}
         isEmpty={characters.length === 0}
         showMoreButton={showMoreButton}
+        loading={loading}
       />
       <button className="btn--go-top" onClick={goToTop}>
         <i className="fa-solid fa-circle-up"></i>

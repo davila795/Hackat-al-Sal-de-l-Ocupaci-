@@ -1,19 +1,22 @@
 import { useRef } from "react";
+import { API } from "../types";
 
 type useDebouncePropsType = {
-  func: (url: string) => void;
+  func: (url: string) => Promise<API | null>;
   delay: number;
 };
 
 export default function useDebounce({ func, delay }: useDebouncePropsType) {
   const intervalRef = useRef<number | null>(null);
 
-  return (url: string) => {
+  return (url: string): Promise<API | null> => {
     if (intervalRef.current) clearTimeout(intervalRef.current);
 
-    intervalRef.current = setTimeout(() => {
-      func(url);
-      console.log("haciendo llamada");
-    }, delay);
+    return new Promise((resolve) => {
+      intervalRef.current = setTimeout(() => {
+        console.log("haciendo llamada");
+        resolve(func(url));
+      }, delay);
+    });
   };
 }

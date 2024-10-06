@@ -9,29 +9,13 @@ export const useCharacters = (name: string, page: number) => {
   const [loading, setLoading] = useState(false);
 
   const fetchCaracters = async (url: string) => {
-    setLoading(true);
     try {
       const response = await fetch(url);
-      if (response.ok) {
-        const data: API = await response.json();
-        const characters = data.results;
-
-        setShowMoreButton(data.info.pages > page);
-
-        if (page > 1) {
-          setCharacters((prevCharacters) => [...prevCharacters, ...characters]);
-          return;
-        }
-        setCharacters(characters);
-      } else {
-        setCharacters([]);
-        setShowMoreButton(false);
-        console.error("Fetch failed");
-      }
+      const data: API = await response.json();
+      return response.ok ? data : null;
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
+      return null;
     }
   };
 
@@ -41,7 +25,32 @@ export const useCharacters = (name: string, page: number) => {
   });
 
   useEffect(() => {
-    fetchCaractersDebounced(`${API_URL}/?name=${name}&page=${page}`);
+    const fetchData = async () => {
+      setLoading(true);
+      const data = await fetchCaractersDebounced(
+        `${API_URL}/?name=${name}&page=${page}`
+      );
+
+      if (data) {
+        const characters = data.results;
+        const numPages = data.info.pages;
+        page === 1
+          ? setCharacters(characters)
+          : setCharacters((prevCharacters) => [
+              ...prevCharacters,
+              ...characters,
+            ]);
+
+        setShowMoreButton(numPages > page);
+      } else {
+        setCharacters([]);
+        setShowMoreButton(false);
+      }
+
+      setLoading(false);
+    };
+
+    fetchData();
   }, [page, name]);
 
   return { characters, showMoreButton, loading };

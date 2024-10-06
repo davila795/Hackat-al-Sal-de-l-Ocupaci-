@@ -7,6 +7,7 @@ type CharacterListProps = {
   isEmpty: boolean;
   characters: Character[];
   showMoreButton: boolean;
+  loading: boolean;
   handleShowMore: () => void;
 };
 
@@ -14,6 +15,7 @@ export default function CharacterList({
   characters,
   handleShowMore,
   isEmpty,
+  loading,
   showMoreButton,
 }: CharacterListProps) {
   return (
@@ -45,7 +47,11 @@ export default function CharacterList({
             className="character-list__btn--more"
             onClick={handleShowMore}
           >
-            Ver más...
+            {loading ? (
+              <div className="spinning-loader"></div>
+            ) : (
+              <p>Ver más...</p>
+            )}
           </button>
         )}
       </div>

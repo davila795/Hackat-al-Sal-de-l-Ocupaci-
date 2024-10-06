@@ -56,3 +56,22 @@ img {
   color: var(--yellow);
   transform: scale(1.05);
 }
+
+.spinning-loader {
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 5px solid var(--black);
+  border-top: 5px solid var(--white); 
+  animation: spin 1s linear infinite; 
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
