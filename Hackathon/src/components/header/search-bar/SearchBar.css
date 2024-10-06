@@ -41,7 +41,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 512px) {
   .header__search-bar {
     display: none;
   }
@@ -59,7 +59,7 @@
   }
 
   .header__search-bar__input {
-    font-size: 0.8rem;
+    width: 100%;
     color: var(--black);
   }
 

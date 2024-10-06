@@ -1,7 +1,7 @@
 /* Custom Font de rick y morty */
 @font-face {
   font-family: "Rick&Morty";
-  src: url("/font/WubbaLubbaDubDub.ttf") format("truetype");
+  src: url("/assets/font/WubbaLubbaDubDub.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -41,20 +41,26 @@ img {
   font-family: "Rick&Morty", sans-serif;
 }
 
-.btn--go-top i {
+.btn--go-top {
   position: fixed;
-  right: 2px;
-  bottom: 8%;
+  right: 5px;
+  bottom: 10%;
   z-index: 10;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn--go-top i {
   font-size: 2.5rem;
   color: var(--white);
-  cursor: pointer;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0.9;
 }
 
 .btn--go-top i:hover {
-  color: var(--yellow);
   transform: scale(1.05);
+  opacity: 1;
 }
 
 .spinning-loader {
@@ -63,8 +69,8 @@ img {
   margin: 0 auto;
   border-radius: 50%;
   border: 5px solid var(--black);
-  border-top: 5px solid var(--white); 
-  animation: spin 1s linear infinite; 
+  border-top: 5px solid var(--white);
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {

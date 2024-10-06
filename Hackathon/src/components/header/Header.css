@@ -22,7 +22,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 512px) {
   .header__title {
     font-size: 3rem;
   }

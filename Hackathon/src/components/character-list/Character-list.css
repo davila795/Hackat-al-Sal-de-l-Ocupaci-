@@ -59,7 +59,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 512px) {
   .character-list {
     margin-bottom: 50px; /*Espacio para la barra mobile*/
   }
