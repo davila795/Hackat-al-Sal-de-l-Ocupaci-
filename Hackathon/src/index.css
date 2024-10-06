@@ -43,24 +43,27 @@ img {
 
 .btn--go-top {
   position: fixed;
-  right: 5px;
+  left: 90%;
   bottom: 10%;
   z-index: 10;
   background: none;
   border: none;
+  border-radius: 50%;
   cursor: pointer;
 }
 
 .btn--go-top i {
   font-size: 2.5rem;
   color: var(--white);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0.9;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  border-radius: 50%;
 }
 
 .btn--go-top i:hover {
-  transform: scale(1.05);
+  transform: scale(1.2);
   opacity: 1;
+  background-color: var(--black);
 }
 
 .spinning-loader {
@@ -79,5 +82,17 @@ img {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1400px) {
+  .btn--go-top {
+    left: 95%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .btn--go-top {
+    left: calc(100% - 2.5rem);
   }
 }
