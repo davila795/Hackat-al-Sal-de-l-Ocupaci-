@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import Header from "./components/header/Header";
 import CharacterList from "./components/character-list/CharacterList";
 import MobileBar from "./components/mobile-bar/MobileBar";
@@ -27,13 +27,22 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
+  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setShowBar(false);
+  };
+
   const goToTop = () => {
     topPageRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div ref={topPageRef} className="container">
-      <Header showBar={showBar} handleOnChange={handleOnChange} />
+      <Header
+        showBar={showBar}
+        handleOnChange={handleOnChange}
+        handleOnSubmit={handleOnSubmit}
+      />
       {loading && <div className="spinning-loader"></div>}
       <CharacterList
         characters={characters}

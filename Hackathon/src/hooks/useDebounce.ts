@@ -14,7 +14,6 @@ export default function useDebounce({ func, delay }: useDebouncePropsType) {
 
     return new Promise((resolve) => {
       intervalRef.current = setTimeout(() => {
-        console.log("haciendo llamada");
         resolve(func(url));
       }, delay);
     });
