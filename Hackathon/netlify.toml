@@ -1,0 +1,14 @@
+[build]
+  base = "Hackathon"
+  publish = "Hackathon/build"
+  command = "pnpm run build"
+
+[build.environment]
+  NODE_VERSION = "18" # or whichever version you're using
+  NPM_FLAGS = "--version" # Optional, to ensure the correct package manager is used
+
+[context.production.environment]
+  NPM_FLAGS = "--version"
+
+[[plugins]]
+  package = "@netlify/plugin-pnpm"
