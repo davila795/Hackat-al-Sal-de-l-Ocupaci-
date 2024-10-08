@@ -1,5 +1,5 @@
 # Prueba Frontend Hackató Saló Ocupació.
-
+## Demo -> https://react-rickymorty-hackat.netlify.app/
 ## Descripción
 
 Aplicación creada usando React + Typescript y la API de Rick y Morty. Los estilos fueron creados con CSS puro y poniendo en práctica la metodología BEM.
