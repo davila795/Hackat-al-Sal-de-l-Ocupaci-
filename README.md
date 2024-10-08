@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# Prueba Frontend Hackató Saló Ocupació.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+Aplicación creada usando React + Typescript, la API de Rick y Morty. Los estilos fueron creados con CSS puro y poniendo en práctica la metodología BEM.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características
 
-## Expanding the ESLint configuration
+- Componentes:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  1. Character List
 
-- Configure the top-level `parserOptions` property like this:
+  - Card
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+  2. Header
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+  - Search Bar
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+  3. Mobile Bar
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+- Custom Hooks
+
+  1. useCharacters: abstrae toda la lógica relacionada con los personajes y los estados que afecta; [characters, showMoreButton, loading].
+
+  2. useDebounce: hook usado para crear una version debouncing de la funcion pasada por parametro. Esto lo que hace es convertir la función a una más optima y eficiente, reduciendo la cantidad de veces que se ejecuta en un periodo de tiempo establecido. En este proyecto, es usado para no saturar a base de llamadas al servidor de la API, creando un delay minimo para no afectar la búsqueda a tiempo real.
+
+- Utilities
+  1. fetchCharacters: función que abstrae la lógica de hacer una petición GET a la api.
+
+## Instalación
+
+Instrucciones para instalar y configurar el proyecto.
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/davila795/Hackat-al-Sal-de-l-Ocupaci-.git
+
+# Navegar al directorio del proyecto
+cd Hackat-al-Sal-de-l-Ocupaci-
+
+# Instalar dependencias
+npm install
+
+# Comando para iniciar el proyecto
+npm run dev
 ```
