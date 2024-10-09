@@ -1,27 +1,27 @@
-import { ChangeEvent, FormEvent, useEffect, useRef } from "react";
+import { ChangeEvent, FormEvent, memo, useEffect, useRef } from "react";
 import "./SearchBar.css";
 
 type SearchBarProps = {
-  showbar: boolean;
+  showSearchBarMobile: boolean;
   handleOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleOnSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
-export default function SearchBar({
-  showbar,
+export default memo(function SearchBar({
+  showSearchBarMobile,
   handleOnChange,
   handleOnSubmit,
 }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (showbar) {
+    if (showSearchBarMobile) {
       inputRef.current?.focus();
     }
-  }, [showbar]);
+  }, [showSearchBarMobile]);
 
   return (
-    <div className={`header__search-bar ${showbar && "active"}`}>
+    <div className={`header__search-bar ${showSearchBarMobile && "active"}`}>
       <form className="header__search-bar__form" onSubmit={handleOnSubmit}>
         <div className="header__search-bar__form-group">
           <input
@@ -43,4 +43,4 @@ export default function SearchBar({
       </form>
     </div>
   );
-}
+});

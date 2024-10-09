@@ -1,11 +1,11 @@
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import Header from "./components/header/Header";
 import CharacterList from "./components/character-list/CharacterList";
 import MobileBar from "./components/mobile-bar/MobileBar";
 import { useCharacters } from "./hooks/useCharacters";
 
 function App() {
-  const [showBar, setShowBar] = useState(false);
+  const [showSearchBarMobile, setshowSearchBarMobile] = useState(false);
   const [name, setName] = useState("");
   const [page, setPage] = useState(1);
 
@@ -13,33 +13,35 @@ function App() {
 
   const topPageRef = useRef<HTMLDivElement>(null);
 
-  const handleOnCLick = () => {
-    setShowBar((prevShowBar) => !prevShowBar);
-  };
+  const handleOnCLick = useCallback(() => {
+    setshowSearchBarMobile(
+      (prevshowSearchBarMobile) => !prevshowSearchBarMobile
+    );
+  }, []);
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setPage(1);
     setName(value);
-  };
+  }, []);
 
-  const handleShowMore = () => {
+  const handleShowMore = useCallback(() => {
     setPage((prevPage) => prevPage + 1);
-  };
+  }, []);
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setShowBar(false);
-  };
+    setshowSearchBarMobile(false);
+  }, []);
 
-  const goToTop = () => {
+  const goToTop = useCallback(() => {
     topPageRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
   return (
     <div ref={topPageRef} className="container">
       <Header
-        showBar={showBar}
+        showSearchBarMobile={showSearchBarMobile}
         handleOnChange={handleOnChange}
         handleOnSubmit={handleOnSubmit}
       />

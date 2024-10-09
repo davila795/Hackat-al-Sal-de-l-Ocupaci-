@@ -1,6 +1,7 @@
+import { memo } from "react";
 import "./MobileBar.css";
 
-export default function MobileBar({
+export default memo(function MobileBar({
   handleOnCLick,
 }: {
   handleOnCLick: () => void;
@@ -12,4 +13,4 @@ export default function MobileBar({
       </button>
     </div>
   );
-}
+});
