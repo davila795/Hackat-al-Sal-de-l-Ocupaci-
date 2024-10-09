@@ -40,8 +40,8 @@ export default function CharacterList({
         </div>
       )}
 
-      <div className="character-list__container-btn">
-        {showMoreButton && (
+      {showMoreButton && (
+        <div className="character-list__container-btn">
           <button
             className="character-list__btn--more"
             onClick={handleShowMore}
@@ -52,8 +52,8 @@ export default function CharacterList({
               <p>Ver más...</p>
             )}
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

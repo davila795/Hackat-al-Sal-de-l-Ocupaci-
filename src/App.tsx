@@ -1,15 +1,29 @@
-import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Header from "./components/header/Header";
 import CharacterList from "./components/character-list/CharacterList";
 import MobileBar from "./components/mobile-bar/MobileBar";
 import { useCharacters } from "./hooks/useCharacters";
+import { useDebounce } from "./hooks/useDebounce";
 
 function App() {
   const [showSearchBarMobile, setshowSearchBarMobile] = useState(false);
   const [name, setName] = useState("");
   const [page, setPage] = useState(1);
 
-  const { characters, loading, showMoreButton } = useCharacters(name, page);
+  const debouncedName = useDebounce(name);
+
+  const { characters, loading, showMoreButton } = useCharacters(
+    debouncedName,
+    page
+  );
 
   const topPageRef = useRef<HTMLDivElement>(null);
 
@@ -34,9 +48,21 @@ function App() {
     setshowSearchBarMobile(false);
   }, []);
 
-  const goToTop = useCallback(() => {
-    topPageRef.current?.scrollIntoView({ behavior: "smooth" });
+  const goToTop = useCallback((e?: React.MouseEvent<HTMLButtonElement>) => {
+    let behavior: ScrollBehavior = "auto";
+    if (e) {
+      e.preventDefault();
+      behavior = "smooth";
+    }
+
+    topPageRef.current?.scrollIntoView({ behavior });
   }, []);
+
+  useEffect(() => {
+    goToTop();
+  }, [debouncedName, goToTop]);
+
+  const isEmpty = useMemo(() => characters.length === 0, [characters]);
 
   return (
     <div ref={topPageRef} className="container">
@@ -45,17 +71,25 @@ function App() {
         handleOnChange={handleOnChange}
         handleOnSubmit={handleOnSubmit}
       />
-      {loading && <div className="spinning-loader"></div>}
-      <CharacterList
-        characters={characters}
-        handleShowMore={handleShowMore}
-        isEmpty={characters.length === 0}
-        showMoreButton={showMoreButton}
-        loading={loading}
-      />
-      <button className="btn--go-top" onClick={goToTop}>
-        <i className="fa-solid fa-circle-up"></i>
-      </button>
+
+      {loading && page === 1 ? (
+        <div className="spinning-loader"></div>
+      ) : (
+        <CharacterList
+          characters={characters}
+          handleShowMore={handleShowMore}
+          isEmpty={isEmpty}
+          showMoreButton={showMoreButton}
+          loading={loading}
+        />
+      )}
+
+      {!isEmpty && (
+        <button className="btn--go-top" onClick={(e) => goToTop(e)}>
+          <i className="fa-solid fa-circle-up"></i>
+        </button>
+      )}
+
       <MobileBar handleOnCLick={handleOnCLick} />
     </div>
   );

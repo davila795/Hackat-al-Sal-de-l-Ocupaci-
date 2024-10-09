@@ -1,21 +1,15 @@
-import { useRef } from "react";
-import { API } from "../types";
+import { useEffect, useState } from "react";
 
-type useDebouncePropsType = {
-  func: (url: string) => Promise<API | null>;
-  delay: number;
+export const useDebounce = <T>(value: T, delay = 500) => {
+  const [debouncedValue, setDebounceValue] = useState(value);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setDebounceValue(value);
+    }, delay);
+
+    return () => clearTimeout(timeOut);
+  }, [value, delay]);
+
+  return debouncedValue;
 };
-
-export default function useDebounce({ func, delay }: useDebouncePropsType) {
-  const intervalRef = useRef<number | null>(null);
-
-  return (url: string): Promise<API | null> => {
-    if (intervalRef.current) clearTimeout(intervalRef.current);
-
-    return new Promise((resolve) => {
-      intervalRef.current = setTimeout(() => {
-        resolve(func(url));
-      }, delay);
-    });
-  };
-}
