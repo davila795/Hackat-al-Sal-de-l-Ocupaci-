@@ -21,15 +21,13 @@ Aplicación creada usando React + Typescript y la API de Rick y Morty. Los estil
 ### Custom Hooks
 
 #### useCharacters
-    Abstrae toda la lógica relacionada con los personajes y los estados que afecta; [characters, showMoreButton, loading].
+    Abstrae toda la lógica relacionada con los personajes y a los estados que afecta; [characters, showMoreButton, loading].
 
 #### useDebounce
-    Hook usado para crear una version debouncing de la funcion pasada por parametro. Esto lo que hace es convertir la función a una más optima y eficiente, reduciendo la cantidad de veces
-    que se ejecuta en un periodo de tiempo establecido. En este proyecto, es usado para no saturar a base de llamadas al servidor de la API, creando un delay minimo para no afectar la
-    búsqueda a tiempo real.
+    Hook que crea una version debounced del estado name, usado para hacer la búsqueda a tiempo real. Hasta que no se establece un nuevo debouncedName, no se ejecutará la función fetch en useCharacters. Esto hace la aplicación más optima y eficiente usando un delay de 500ms, reduciendo así la cantidad de veces que se llama a la API.
 
 ### Utilities
-  - ### fetchCharacters
+  - ### fetchData
     función que abstrae la lógica de hacer una petición GET a la api.
 
 ## Instalación
