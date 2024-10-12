@@ -10,6 +10,7 @@ import Header from "./components/header/Header";
 import CharacterList from "./components/character-list/CharacterList";
 import { useCharacters } from "./hooks/useCharacters";
 import { useDebounce } from "./hooks/useDebounce";
+import GoTopBtn from "./components/go-top-btn/GoTopBtn";
 
 function App() {
   const [name, setName] = useState("");
@@ -34,20 +35,6 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   }, []);
 
-  const goToTop = useCallback((e?: React.MouseEvent<HTMLButtonElement>) => {
-    let behavior: ScrollBehavior = "auto";
-    if (e) {
-      e.preventDefault();
-      behavior = "smooth";
-    }
-
-    topPageRef.current?.scrollIntoView({ behavior });
-  }, []);
-
-  useEffect(() => {
-    goToTop();
-  }, [debouncedName, goToTop]);
-
   const isEmpty = useMemo(() => characters.length === 0, [characters]);
 
   return (
@@ -66,11 +53,11 @@ function App() {
         />
       )}
 
-      {!isEmpty && (
-        <button className="btn--go-top" onClick={(e) => goToTop(e)}>
-          <i className="fa-solid fa-circle-up"></i>
-        </button>
-      )}
+      <GoTopBtn
+        isEmpty={isEmpty}
+        debouncedName={debouncedName}
+        topRef={topPageRef}
+      />
     </div>
   );
 }
