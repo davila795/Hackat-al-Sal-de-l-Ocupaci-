@@ -2,9 +2,9 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import { useCharacters } from "../../hooks/useCharacters";
 import { goTop } from "../../utils/goTop";
-import GoTopBtn from "../go-top-btn/GoTopBtn";
+import GoTopBtn from "../aux-components/go-top-btn/GoTopBtn";
 import SearchBar from "./search-bar/SearchBar";
-import Spinner from "../spinner/Spinner";
+import Spinner from "../aux-components/spinner/Spinner";
 import CharacterList from "./character-list/CharacterList";
 
 type MainContainerProps = {

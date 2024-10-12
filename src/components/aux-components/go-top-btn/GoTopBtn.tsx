@@ -1,5 +1,5 @@
 import React from "react";
-import { goTop } from "../../utils/goTop";
+import { goTop } from "../../../utils/goTop";
 import "./GoTop.css";
 
 type GoTopBtnProps = {

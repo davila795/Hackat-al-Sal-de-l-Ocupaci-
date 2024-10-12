@@ -1,6 +1,6 @@
 import { Character } from "../../../types";
-import ErrorMsg from "../../error-message/ErrorMsg";
-import MoreBtn from "../../more-btn/MoreBtn";
+import ErrorMsg from "../../aux-components/error-message/ErrorMsg";
+import MoreBtn from "../../aux-components/more-btn/MoreBtn";
 import Card from "./card/Card";
 import "./CharacterList.css";
 
