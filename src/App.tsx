@@ -1,6 +1,5 @@
 import {
   ChangeEvent,
-  FormEvent,
   useCallback,
   useEffect,
   useMemo,
@@ -9,12 +8,10 @@ import {
 } from "react";
 import Header from "./components/header/Header";
 import CharacterList from "./components/character-list/CharacterList";
-import MobileBar from "./components/mobile-bar/MobileBar";
 import { useCharacters } from "./hooks/useCharacters";
 import { useDebounce } from "./hooks/useDebounce";
 
 function App() {
-  const [showSearchBarMobile, setshowSearchBarMobile] = useState(false);
   const [name, setName] = useState("");
   const [page, setPage] = useState(1);
 
@@ -27,12 +24,6 @@ function App() {
 
   const topPageRef = useRef<HTMLDivElement>(null);
 
-  const handleOnCLick = useCallback(() => {
-    setshowSearchBarMobile(
-      (prevshowSearchBarMobile) => !prevshowSearchBarMobile
-    );
-  }, []);
-
   const handleOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setPage(1);
@@ -41,11 +32,6 @@ function App() {
 
   const handleShowMore = useCallback(() => {
     setPage((prevPage) => prevPage + 1);
-  }, []);
-
-  const handleOnSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setshowSearchBarMobile(false);
   }, []);
 
   const goToTop = useCallback((e?: React.MouseEvent<HTMLButtonElement>) => {
@@ -66,11 +52,7 @@ function App() {
 
   return (
     <div ref={topPageRef} className="container">
-      <Header
-        showSearchBarMobile={showSearchBarMobile}
-        handleOnChange={handleOnChange}
-        handleOnSubmit={handleOnSubmit}
-      />
+      <Header handleOnChange={handleOnChange} />
 
       {loading && page === 1 ? (
         <div className="spinning-loader"></div>
@@ -89,8 +71,6 @@ function App() {
           <i className="fa-solid fa-circle-up"></i>
         </button>
       )}
-
-      <MobileBar handleOnCLick={handleOnCLick} />
     </div>
   );
 }

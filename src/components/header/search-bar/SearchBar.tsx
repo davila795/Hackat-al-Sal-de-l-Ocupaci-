@@ -1,17 +1,14 @@
-import { ChangeEvent, FormEvent, memo, useEffect, useRef } from "react";
+import { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef, useState } from "react";
 import "./SearchBar.css";
+import MobileBar from "../../mobile-bar/MobileBar";
 
 type SearchBarProps = {
-  showSearchBarMobile: boolean;
   handleOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleOnSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
-export default memo(function SearchBar({
-  showSearchBarMobile,
-  handleOnChange,
-  handleOnSubmit,
-}: SearchBarProps) {
+export default memo(function SearchBar({ handleOnChange }: SearchBarProps) {
+  const [showSearchBarMobile, setshowSearchBarMobile] = useState(false);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -20,27 +17,42 @@ export default memo(function SearchBar({
     }
   }, [showSearchBarMobile]);
 
+  const handleOnSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setshowSearchBarMobile(false);
+  }, []);
+
+  const handleOnCLick = useCallback(() => {
+    setshowSearchBarMobile(
+      (prevshowSearchBarMobile) => !prevshowSearchBarMobile
+    );
+  }, []);
+
   return (
-    <div className={`header__search-bar ${showSearchBarMobile && "active"}`}>
-      <form className="header__search-bar__form" onSubmit={handleOnSubmit}>
-        <div className="header__search-bar__form-group">
-          <input
-            className="header__search-bar__form-group__input"
-            ref={inputRef}
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Busca un personaje"
-            onChange={handleOnChange}
-          />
-          <label
-            className="header__search-bar__form-group__label"
-            htmlFor="name"
-          >
-            <i className="fa-solid fa-magnifying-glass fa-xl"></i>
-          </label>
-        </div>
-      </form>
-    </div>
+    <>
+      <div className={`header__search-bar ${showSearchBarMobile && "active"}`}>
+        <form className="header__search-bar__form" onSubmit={handleOnSubmit}>
+          <div className="header__search-bar__form-group">
+            <input
+              className="header__search-bar__form-group__input"
+              ref={inputRef}
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Busca un personaje"
+              onChange={handleOnChange}
+            />
+            <label
+              className="header__search-bar__form-group__label"
+              htmlFor="name"
+            >
+              <i className="fa-solid fa-magnifying-glass fa-xl"></i>
+            </label>
+          </div>
+        </form>
+      </div>
+      
+      <MobileBar handleOnCLick={handleOnCLick} />
+    </>
   );
 });
