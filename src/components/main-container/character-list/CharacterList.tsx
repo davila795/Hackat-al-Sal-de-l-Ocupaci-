@@ -1,11 +1,13 @@
-import { Character } from "../../types";
+import { Character } from "../../../types";
+import ErrorMsg from "../../error-message/ErrorMsg";
+import MoreBtn from "../../more-btn/MoreBtn";
 import Card from "./card/Card";
-import "./Character-list.css";
+import "./CharacterList.css";
 
 type CharacterListProps = {
-  isEmpty: boolean;
   characters: Character[];
   showMoreButton: boolean;
+  isEmpty: boolean;
   loading: boolean;
   handleShowMore: () => void;
 };
@@ -27,11 +29,7 @@ export default function CharacterList({
       </div>
 
       {isEmpty ? (
-        <>
-          <p className="character-list__grid__message--not-found font-rick">
-            No se encontraron resultados <i className="fa-solid fa-skull"></i>
-          </p>
-        </>
+        <ErrorMsg />
       ) : (
         <div className="character-list__grid">
           {characters.map((character) => {
@@ -42,16 +40,7 @@ export default function CharacterList({
 
       {showMoreButton && (
         <div className="character-list__container-btn">
-          <button
-            className="character-list__btn--more"
-            onClick={handleShowMore}
-          >
-            {loading ? (
-              <div className="spinning-loader"></div>
-            ) : (
-              <p>Ver más...</p>
-            )}
-          </button>
+          <MoreBtn handleShowMore={handleShowMore} loading={loading} />
         </div>
       )}
     </section>

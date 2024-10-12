@@ -1,4 +1,4 @@
-import { Character } from "../../../types";
+import { Character } from "../../../../types";
 import "./Card.css";
 
 export default function Card({ character }: { character: Character }) {

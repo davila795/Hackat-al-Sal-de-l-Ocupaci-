@@ -30,11 +30,11 @@ export default memo(function SearchBar({ handleOnChange }: SearchBarProps) {
 
   return (
     <>
-      <div className={`header__search-bar ${showSearchBarMobile && "active"}`}>
-        <form className="header__search-bar__form" onSubmit={handleOnSubmit}>
-          <div className="header__search-bar__form-group">
+      <div className={`search-bar ${showSearchBarMobile && "active"}`}>
+        <form className="search-bar__form" onSubmit={handleOnSubmit}>
+          <div className="search-bar__form-group">
             <input
-              className="header__search-bar__form-group__input"
+              className="search-bar__form-group__input"
               ref={inputRef}
               id="name"
               name="name"
@@ -43,7 +43,7 @@ export default memo(function SearchBar({ handleOnChange }: SearchBarProps) {
               onChange={handleOnChange}
             />
             <label
-              className="header__search-bar__form-group__label"
+              className="search-bar__form-group__label"
               htmlFor="name"
             >
               <i className="fa-solid fa-magnifying-glass fa-xl"></i>

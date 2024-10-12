@@ -1,0 +1,18 @@
+.character-list__btn--more {
+  display: block;
+  padding: 0.8rem;
+  margin: 0 auto;
+  width: 50%;
+  border: 1px solid var(--white);
+  background: transparent;
+  color: var(--white);
+  font-size: 0.9rem;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.character-list__btn--more:hover {
+  background-color: var(--blue);
+  border: none;
+}
