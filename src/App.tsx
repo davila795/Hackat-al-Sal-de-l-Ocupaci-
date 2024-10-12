@@ -1,15 +1,10 @@
-import {
-  ChangeEvent,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import Header from "./components/header/Header";
 import CharacterList from "./components/character-list/CharacterList";
 import { useCharacters } from "./hooks/useCharacters";
 import { useDebounce } from "./hooks/useDebounce";
 import GoTopBtn from "./components/go-top-btn/GoTopBtn";
+import { goTop } from "./utils/goTop";
 
 function App() {
   const [name, setName] = useState("");
@@ -24,6 +19,10 @@ function App() {
 
   const topPageRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    goTop(topPageRef);
+  }, [debouncedName]);
+
   const handleOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setPage(1);
@@ -34,12 +33,11 @@ function App() {
     setPage((prevPage) => prevPage + 1);
   }, []);
 
-  const isEmpty = useMemo(() => characters.length === 0, [characters]);
+  const isEmpty = characters.length === 0;
 
   return (
     <div ref={topPageRef} className="container">
       <Header handleOnChange={handleOnChange} />
-
       {loading && page === 1 ? (
         <div className="spinning-loader"></div>
       ) : (
@@ -51,12 +49,7 @@ function App() {
           loading={loading}
         />
       )}
-
-      <GoTopBtn
-        isEmpty={isEmpty}
-        debouncedName={debouncedName}
-        topRef={topPageRef}
-      />
+      {!isEmpty && <GoTopBtn topRef={topPageRef} />}
     </div>
   );
 }
